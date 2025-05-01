@@ -51,17 +51,17 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         }
         return total;
     }
-}
 
-Yatzy.yatzy = function() {
-    var counts = [0, 0, 0, 0, 0, 0, 0, 0];
-    for (var i = 0; i != arguments.length; ++i) {
-    var die = arguments[i];
-    counts[die-1]++; }
-    for (i = 0; i != 6; i++)
-        if (counts[i] == 5)
-            return 50;
-    return 0;
+    this.get50PointsWhenAllDicesAreEqual = function() {
+        let counts = this.countDicesOcurrences(this.diceList);
+
+        for (let i = 0; i != 6; i++){
+            if (counts[i] == 5){
+                return 50;
+            }
+        }
+        return 0;
+    }
 }
 
 Yatzy.ones = function(d1, d2, d3, d4, d5) {
