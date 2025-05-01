@@ -1,10 +1,5 @@
-var Yatzy = function(d1, d2, d3, d4, _5) {
-    this.dice = [];
-    this.dice[0] = d1;
-    this.dice[1] = d2;
-    this.dice[2] = d3;
-    this.dice[3] = d4;
-    this.dice[4] = _5;
+var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
+    this.dice = [dice1, dice2, dice3, dice4, dice5];
 
     this.fours = function()
     {
