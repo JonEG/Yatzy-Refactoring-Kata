@@ -1,33 +1,21 @@
+"use strict";
+
 var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
     this.diceList = [dice1, dice2, dice3, dice4, dice5];
 
-    this.fours = function()
-    {
+    this.fours = () => this.sumDicesWithValue(4)
+
+    this.fives = () => this.sumDicesWithValue(5)
+
+    this.sixes = () => this.sumDicesWithValue(6)
+
+    this.sumDicesWithValue = function (diceNumber){
         let sum = 0;
-        for (i = 0; i < this.diceList.length; i++) {
-            if (this.diceList[i] == 4) {
-                sum += 4;
+        for (let i = 0; i < this.diceList.length; i++) {
+            if (this.diceList[i] == diceNumber) {
+                sum += diceNumber;
             }
         }
-        return sum;
-    }
-
-    this.fives = function()
-    {
-        s = 0
-        var i
-        for (i = 0; i < this.diceList.length; i++)
-            if (this.diceList[i] == 5)
-                s = s + 5;
-        return s;
-    }
-
-    this.sixes = function()
-    {
-        sum = 0;
-        for (var at = 0; at < this.diceList.length; at++)
-            if (this.diceList[at] == 6)
-                sum = sum + 6;
         return sum;
     }
 
