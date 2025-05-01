@@ -7,8 +7,7 @@
     "mocha": "^10.8.2"
   },
   "scripts": {
-    "watch" : [
-      "mocha -w"
-    ]
+    "watch" : "mocha -w",
+    "test:debug": "mocha --inspect-brk --timeout 999999 --recursive"
   }
 }

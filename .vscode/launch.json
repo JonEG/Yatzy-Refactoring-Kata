@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Mocha Tests",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "test:debug"],
+        "cwd": "${workspaceFolder}\\javascript\\",    // ← make sure this matches where package.json lives
+        "port": 9229,
+        "skipFiles": ["<node_internals>/**"],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+      }
+    ]
+  }
+  
