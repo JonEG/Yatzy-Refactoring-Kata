@@ -76,8 +76,8 @@ describe("One pair", function() {
 
 describe("Two pair", function() {
     it("scores the sum of the two pairs", function() {
-        assert.equal(16, Yatzy.two_pair(3,3,5,4,5));
-        assert.equal(16, Yatzy.two_pair(3,3,5,5,5));
+        assert.equal(16, new Yatzy(3,3,5,4,5).sumHighestTwoPairs());
+        assert.equal(16, new Yatzy(3,3,5,5,5).sumHighestTwoPairs());
     });
 });
 

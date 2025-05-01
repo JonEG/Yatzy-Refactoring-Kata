@@ -1,6 +1,6 @@
 "use strict";
 
-var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
+var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
     this.diceList = [dice1, dice2, dice3, dice4, dice5];
 
     this.ones = () => this.sumDicesWithValue(1)
@@ -15,7 +15,7 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
 
     this.sixes = () => this.sumDicesWithValue(6)
 
-    this.sumDicesWithValue = function (diceNumber){
+    this.sumDicesWithValue = function (diceNumber) {
         let sum = 0;
         for (let i = 0; i < this.diceList.length; i++) {
             if (this.diceList[i] == diceNumber) {
@@ -25,12 +25,27 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         return sum;
     }
 
-    this.sumHighestPair = function(dices)
-    {
+    this.sumHighestPair = function (dices) {
         let dicesOcurrencies = this.countDicesOcurrences(dices);
-        let hightesPairDiceValue = findHighestPairDiceValue(dicesOcurrencies);
+        let hightesPairDiceValue = this.findHighestPairInOcurrencies(dicesOcurrencies);
         let sum = hightesPairDiceValue * 2;
         return sum;
+    }
+
+    this.sumHighestTwoPairs = function () {
+        let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList)
+        let highestPairValue = new Yatzy().findHighestPairInOcurrencies(ocurrencies);
+
+        let dicesWithoutHighestValue = this.diceList.filter(value => value !== highestPairValue);
+
+        let ocurrenciesWithoutHighestValue = new Yatzy().countDicesOcurrences(dicesWithoutHighestValue)
+        let secondHighestPairValue = new Yatzy().findHighestPairInOcurrencies(ocurrenciesWithoutHighestValue);
+
+        if (highestPairValue != 0 && secondHighestPairValue != 0) {
+            return (highestPairValue * 2) + (secondHighestPairValue * 2);
+        } else {
+            return 0;
+        }
     }
 
     this.countDicesOcurrences = function (dices) {
@@ -40,8 +55,8 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         }
         return counts;
     }
-    
-    function findHighestPairDiceValue(ocurrencies) {
+
+    this.findHighestPairInOcurrencies = function (ocurrencies) {
         for (let i = 5; i >= 0; i--) {
             if (ocurrencies[i] >= 2) {
                 return (i + 1);
@@ -50,19 +65,19 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         return 0;
     }
 
-    this.sumAll = function() {
+    this.sumAll = function () {
         let total = 0;
         for (const dice of this.diceList) {
-            total+= dice;
+            total += dice;
         }
         return total;
     }
 
-    this.get50PointsWhenAllDicesAreEqual = function() {
+    this.get50PointsWhenAllDicesAreEqual = function () {
         let counts = this.countDicesOcurrences(this.diceList);
 
-        for (let i = 0; i != 6; i++){
-            if (counts[i] == 5){
+        for (let i = 0; i != 6; i++) {
+            if (counts[i] == 5) {
                 return 50;
             }
         }
@@ -70,66 +85,42 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
     }
 }
 
-Yatzy.two_pair = function(d1, d2, d3, d4, d5)
-{
-    var counts = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    counts[d1-1]++;
-    counts[d2-1]++
-    counts[d3-1]++
-    counts[d4-1]++;
-    counts[d5-1]++;
-    var n = 0;
-    var score = 0;
-    for (let i = 0; i < 6; i += 1)
-        if (counts[6-i-1] >= 2) {
-            n++;
-            score += (6-i);
-        }
-    if (n == 2)
-        return score * 2;
-    else
-        return 0;
-}
-
-Yatzy.four_of_a_kind = function(_1, _2, d3, d4, d5)
-{
+Yatzy.four_of_a_kind = function (_1, _2, d3, d4, d5) {
     var tallies;
     tallies = [0, 0, 0, 0, 0, 0, 0, 0]
-    tallies[_1-1]++;
-    tallies[_2-1]++;
-    tallies[d3-1]++;
-    tallies[d4-1]++;
-    tallies[d5-1]++;
+    tallies[_1 - 1]++;
+    tallies[_2 - 1]++;
+    tallies[d3 - 1]++;
+    tallies[d4 - 1]++;
+    tallies[d5 - 1]++;
     for (let i = 0; i < 6; i++)
         if (tallies[i] >= 4)
-            return (i+1) * 4;
+            return (i + 1) * 4;
     return 0;
 }
 
-Yatzy.three_of_a_kind = function(d1, d2, d3, d4, d5)
-{
+Yatzy.three_of_a_kind = function (d1, d2, d3, d4, d5) {
     var t;
     t = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    t[d1-1]++;
-    t[d2-1]++;
-    t[d3-1]++;
-    t[d4-1]++;
-    t[d5-1]++;
+    t[d1 - 1]++;
+    t[d2 - 1]++;
+    t[d3 - 1]++;
+    t[d4 - 1]++;
+    t[d5 - 1]++;
     for (let i = 0; i < 6; i++)
         if (t[i] >= 3)
-            return (i+1) * 3;
+            return (i + 1) * 3;
     return 0;
 }
 
-Yatzy.smallStraight = function(d1, d2, d3, d4, d5)
-{
+Yatzy.smallStraight = function (d1, d2, d3, d4, d5) {
     var tallies;
     tallies = [0, 0, 0, 0, 0, 0, 0]
-    tallies[d1-1] += 1;
-    tallies[d2-1] += 1;
-    tallies[d3-1] += 1;
-    tallies[d4-1] += 1;
-    tallies[d5-1] += 1;
+    tallies[d1 - 1] += 1;
+    tallies[d2 - 1] += 1;
+    tallies[d3 - 1] += 1;
+    tallies[d4 - 1] += 1;
+    tallies[d5 - 1] += 1;
     if (tallies[0] == 1 &&
         tallies[1] == 1 &&
         tallies[2] == 1 &&
@@ -139,15 +130,14 @@ Yatzy.smallStraight = function(d1, d2, d3, d4, d5)
     return 0;
 }
 
-Yatzy.largeStraight = function(d1, d2, d3, d4, d5)
-{
+Yatzy.largeStraight = function (d1, d2, d3, d4, d5) {
     var tallies;
-    tallies = [0, 0, 0, 0,0,0,0,0];
-    tallies[d1-1] += 1;
-    tallies[d2-1] += 1;
-    tallies[d3-1] += 1;
-    tallies[d4-1] += 1;
-    tallies[d5-1] += 1;
+    tallies = [0, 0, 0, 0, 0, 0, 0, 0];
+    tallies[d1 - 1] += 1;
+    tallies[d2 - 1] += 1;
+    tallies[d3 - 1] += 1;
+    tallies[d4 - 1] += 1;
+    tallies[d5 - 1] += 1;
     if (tallies[1] == 1 &&
         tallies[2] == 1 &&
         tallies[3] == 1 &&
@@ -157,10 +147,9 @@ Yatzy.largeStraight = function(d1, d2, d3, d4, d5)
     return 0;
 }
 
-Yatzy.fullHouse = function(d1, d2, d3, d4, d5)
-{
+Yatzy.fullHouse = function (d1, d2, d3, d4, d5) {
     var tallies;
-    var  _2 = false;
+    var _2 = false;
     var i;
     var _2_at = 0;
     var _3 = false;
@@ -170,22 +159,22 @@ Yatzy.fullHouse = function(d1, d2, d3, d4, d5)
 
 
     tallies = [0, 0, 0, 0, 0, 0, 0, 0];
-    tallies[d1-1] += 1;
-    tallies[d2-1] += 1;
-    tallies[d3-1] += 1;
-    tallies[d4-1] += 1;
-    tallies[d5-1] += 1;
+    tallies[d1 - 1] += 1;
+    tallies[d2 - 1] += 1;
+    tallies[d3 - 1] += 1;
+    tallies[d4 - 1] += 1;
+    tallies[d5 - 1] += 1;
 
     for (i = 0; i != 6; i += 1)
         if (tallies[i] == 2) {
             _2 = true;
-            _2_at = i+1;
+            _2_at = i + 1;
         }
 
     for (i = 0; i != 6; i += 1)
         if (tallies[i] == 3) {
             _3 = true;
-            _3_at = i+1;
+            _3_at = i + 1;
         }
 
     if (_2 && _3)
