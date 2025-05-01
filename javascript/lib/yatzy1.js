@@ -3,6 +3,12 @@
 var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
     this.diceList = [dice1, dice2, dice3, dice4, dice5];
 
+    this.ones = () => this.sumDicesWithValue(1)
+
+    this.twos = () => this.sumDicesWithValue(2)
+
+    this.threes = () => this.sumDicesWithValue(3)
+
     this.fours = () => this.sumDicesWithValue(4)
 
     this.fives = () => this.sumDicesWithValue(5)
@@ -62,39 +68,6 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         }
         return 0;
     }
-}
-
-Yatzy.ones = function(d1, d2, d3, d4, d5) {
-    var sum = 0;
-    if (d1 == 1) sum++;
-    if (d2 == 1) sum++;
-    if (d3 == 1) sum++;
-    if (d4 == 1) sum++;
-    if (d5 == 1)
-        sum++;
-
-    return sum;
-}
-
-Yatzy.twos = function(d1, d2, d3, d4, d5) {
-    var sum = 0;
-    if (d1 == 2) sum += 2;
-    if (d2 == 2) sum += 2;
-    if (d3 == 2) sum += 2;
-    if (d4 == 2) sum += 2;
-    if (d5 == 2) sum += 2;
-    return sum;
-}
-
-Yatzy.threes = function(d1, d2, d3, d4, d5) {
-    var s;
-    s = 0;
-    if (d1 == 3) s += 3;
-    if (d2 == 3) s += 3;
-    if (d3 == 3) s += 3;
-    if (d4 == 3) s += 3;
-    if (d5 == 3) s += 3;
-    return s;
 }
 
 Yatzy.two_pair = function(d1, d2, d3, d4, d5)
