@@ -57,8 +57,12 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
     }
 
     this.findHighestPairInOcurrencies = function (ocurrencies) {
+        return this.findHighestCombinationValueInOcurrencies({ocurrencies, numberOfEqualDices: 2})
+    }
+
+    this.findHighestCombinationValueInOcurrencies = function ({ocurrencies, numberOfEqualDices}) {
         for (let i = 5; i >= 0; i--) {
-            if (ocurrencies[i] >= 2) {
+            if (ocurrencies[i] >= numberOfEqualDices) {
                 return (i + 1);
             }
         }
@@ -73,6 +77,22 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
         return total;
     }
 
+    this.fourOfAKind = function () {
+        let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
+    
+        let valueThatOccursFourTimes = new Yatzy().findHighestCombinationValueInOcurrencies({ocurrencies, numberOfEqualDices: 4});
+    
+        return valueThatOccursFourTimes * 4;
+    }
+
+    this.threeOfAKind = function () {
+        let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
+    
+        let valueThatOccursThreeTimes = new Yatzy().findHighestCombinationValueInOcurrencies({ocurrencies, numberOfEqualDices: 3});
+    
+        return valueThatOccursThreeTimes * 3;
+    }
+
     this.get50PointsWhenAllDicesAreEqual = function () {
         let counts = this.countDicesOcurrences(this.diceList);
 
@@ -83,34 +103,6 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
         }
         return 0;
     }
-}
-
-Yatzy.four_of_a_kind = function (_1, _2, d3, d4, d5) {
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0, 0]
-    tallies[_1 - 1]++;
-    tallies[_2 - 1]++;
-    tallies[d3 - 1]++;
-    tallies[d4 - 1]++;
-    tallies[d5 - 1]++;
-    for (let i = 0; i < 6; i++)
-        if (tallies[i] >= 4)
-            return (i + 1) * 4;
-    return 0;
-}
-
-Yatzy.three_of_a_kind = function (d1, d2, d3, d4, d5) {
-    var t;
-    t = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    t[d1 - 1]++;
-    t[d2 - 1]++;
-    t[d3 - 1]++;
-    t[d4 - 1]++;
-    t[d5 - 1]++;
-    for (let i = 0; i < 6; i++)
-        if (t[i] >= 3)
-            return (i + 1) * 3;
-    return 0;
 }
 
 Yatzy.smallStraight = function (d1, d2, d3, d4, d5) {
