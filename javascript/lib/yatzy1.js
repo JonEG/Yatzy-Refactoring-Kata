@@ -103,41 +103,41 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
         }
         return 0;
     }
+
+    this.smallStraight = function () {
+        let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
+        
+        let isThereSmallStraight = true;
+    
+        let numberOneOcurrenceIndex = 0;
+        let numberFiveOcurrenceIndex = 4;
+        for (let i = numberOneOcurrenceIndex; i < numberFiveOcurrenceIndex; i++) {
+            let ocurrence = ocurrencies[i]
+            isThereSmallStraight = isThereSmallStraight & (ocurrence == 1);
+            
+        }
+    
+        return isThereSmallStraight ? 15 : 0;
+    }
+    
+    this.largeStraight = function () {
+        let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
+        
+        let isThereSmallStraight = true;
+    
+        let numberOneOcurrenceIndex = 1;
+        let numberFiveOcurrenceIndex = 5;
+        for (let i = numberOneOcurrenceIndex; i < numberFiveOcurrenceIndex; i++) {
+            let ocurrence = ocurrencies[i]
+            isThereSmallStraight = isThereSmallStraight & (ocurrence == 1);
+            
+        }
+    
+        return isThereSmallStraight ? 20 : 0;
+    }
 }
 
-Yatzy.smallStraight = function (d1, d2, d3, d4, d5) {
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0]
-    tallies[d1 - 1] += 1;
-    tallies[d2 - 1] += 1;
-    tallies[d3 - 1] += 1;
-    tallies[d4 - 1] += 1;
-    tallies[d5 - 1] += 1;
-    if (tallies[0] == 1 &&
-        tallies[1] == 1 &&
-        tallies[2] == 1 &&
-        tallies[3] == 1 &&
-        tallies[4] == 1)
-        return 15;
-    return 0;
-}
 
-Yatzy.largeStraight = function (d1, d2, d3, d4, d5) {
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0, 0];
-    tallies[d1 - 1] += 1;
-    tallies[d2 - 1] += 1;
-    tallies[d3 - 1] += 1;
-    tallies[d4 - 1] += 1;
-    tallies[d5 - 1] += 1;
-    if (tallies[1] == 1 &&
-        tallies[2] == 1 &&
-        tallies[3] == 1 &&
-        tallies[4] == 1
-        && tallies[5] == 1)
-        return 20;
-    return 0;
-}
 
 Yatzy.fullHouse = function (d1, d2, d3, d4, d5) {
     var tallies;
