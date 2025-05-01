@@ -1,12 +1,11 @@
 var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
-    this.dice = [dice1, dice2, dice3, dice4, dice5];
+    this.diceList = [dice1, dice2, dice3, dice4, dice5];
 
     this.fours = function()
     {
-        var sum;
-        sum = 0;
-        for (at = 0; at != 5; at++) {
-            if (this.dice[at] == 4) {
+        let sum = 0;
+        for (i = 0; i < this.diceList.length; i++) {
+            if (this.diceList[i] == 4) {
                 sum += 4;
             }
         }
@@ -17,8 +16,8 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
     {
         s = 0
         var i
-        for (i = 0; i < this.dice.length; i++)
-            if (this.dice[i] == 5)
+        for (i = 0; i < this.diceList.length; i++)
+            if (this.diceList[i] == 5)
                 s = s + 5;
         return s;
     }
@@ -26,8 +25,8 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
     this.sixes = function()
     {
         sum = 0;
-        for (var at = 0; at < this.dice.length; at++)
-            if (this.dice[at] == 6)
+        for (var at = 0; at < this.diceList.length; at++)
+            if (this.diceList[at] == 6)
                 sum = sum + 6;
         return sum;
     }
