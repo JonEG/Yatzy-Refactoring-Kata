@@ -19,18 +19,28 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         return sum;
     }
 
-    this.score_pair = function(d1, d2, d3, d4, d5)
+    this.sumHighestPair = function(dices)
     {
-        var counts = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        counts[d1-1]++;
-        counts[d2-1]++;
-        counts[d3-1]++;
-        counts[d4-1]++;
-        counts[d5-1]++;
-        var at;
-        for (at = 0; at != 6; at++)
-            if (counts[6-at-1] >= 2)
-                return (6-at)*2;
+        let dicesOcurrencies = this.countDicesOcurrences(dices);
+        let hightesPairDiceValue = findHighestPairDiceValue(dicesOcurrencies);
+        let sum = hightesPairDiceValue * 2;
+        return sum;
+    }
+
+    this.countDicesOcurrences = function (dices) {
+        const counts = Array(6).fill(0);
+        for (let dice of dices) {
+            counts[dice - 1]++;
+        }
+        return counts;
+    }
+    
+    function findHighestPairDiceValue(ocurrencies) {
+        for (let i = 5; i >= 0; i--) {
+            if (ocurrencies[i] >= 2) {
+                return (i + 1);
+            }
+        }
         return 0;
     }
 }
@@ -99,7 +109,7 @@ Yatzy.two_pair = function(d1, d2, d3, d4, d5)
     counts[d5-1]++;
     var n = 0;
     var score = 0;
-    for (i = 0; i < 6; i += 1)
+    for (let i = 0; i < 6; i += 1)
         if (counts[6-i-1] >= 2) {
             n++;
             score += (6-i);
@@ -119,7 +129,7 @@ Yatzy.four_of_a_kind = function(_1, _2, d3, d4, d5)
     tallies[d3-1]++;
     tallies[d4-1]++;
     tallies[d5-1]++;
-    for (i = 0; i < 6; i++)
+    for (let i = 0; i < 6; i++)
         if (tallies[i] >= 4)
             return (i+1) * 4;
     return 0;
@@ -134,7 +144,7 @@ Yatzy.three_of_a_kind = function(d1, d2, d3, d4, d5)
     t[d3-1]++;
     t[d4-1]++;
     t[d5-1]++;
-    for (i = 0; i < 6; i++)
+    for (let i = 0; i < 6; i++)
         if (t[i] >= 3)
             return (i+1) * 3;
     return 0;

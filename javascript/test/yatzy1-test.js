@@ -68,9 +68,9 @@ describe("Sixes", function() {
 
 describe("One pair", function() {
     it("scores the sum of the highest pair", function() {
-        assert.equal(6, new Yatzy().score_pair(3,4,3,5,6));
-        assert.equal(10, new Yatzy().score_pair(5,3,3,3,5));
-        assert.equal(12, new Yatzy().score_pair(5,3,6,6,5));
+        assert.equal(6, new Yatzy().sumHighestPair([3,4,3,5,6]));
+        assert.equal(10, new Yatzy().sumHighestPair([5,3,3,3,5]));
+        assert.equal(12, new Yatzy().sumHighestPair([5,3,6,6,5]));
     });
 });
 
