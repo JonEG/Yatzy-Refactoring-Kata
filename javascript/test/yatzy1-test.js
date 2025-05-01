@@ -115,7 +115,7 @@ describe("Large straight", function() {
 
 describe("Full house", function() {
     it("scores the sum of the full house", function() {
-        assert.equal(18, Yatzy.fullHouse(6,2,2,2,6));
-        assert.equal(0, Yatzy.fullHouse(2,3,4,5,6));
+        assert.equal(18, new Yatzy(6,2,2,2,6).fullHouse());
+        assert.equal(0, new Yatzy(2,3,4,5,6).fullHouse());
     });
 });

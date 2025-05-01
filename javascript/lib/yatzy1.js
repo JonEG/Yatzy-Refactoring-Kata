@@ -57,10 +57,10 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
     }
 
     this.findHighestPairInOcurrencies = function (ocurrencies) {
-        return this.findHighestCombinationValueInOcurrencies({ocurrencies, numberOfEqualDices: 2})
+        return this.findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 2 })
     }
 
-    this.findHighestCombinationValueInOcurrencies = function ({ocurrencies, numberOfEqualDices}) {
+    this.findHighestCombinationValueInOcurrencies = function ({ ocurrencies, numberOfEqualDices }) {
         for (let i = 5; i >= 0; i--) {
             if (ocurrencies[i] >= numberOfEqualDices) {
                 return (i + 1);
@@ -79,17 +79,17 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
 
     this.fourOfAKind = function () {
         let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
-    
-        let valueThatOccursFourTimes = new Yatzy().findHighestCombinationValueInOcurrencies({ocurrencies, numberOfEqualDices: 4});
-    
+
+        let valueThatOccursFourTimes = new Yatzy().findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 4 });
+
         return valueThatOccursFourTimes * 4;
     }
 
     this.threeOfAKind = function () {
         let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
-    
-        let valueThatOccursThreeTimes = new Yatzy().findHighestCombinationValueInOcurrencies({ocurrencies, numberOfEqualDices: 3});
-    
+
+        let valueThatOccursThreeTimes = new Yatzy().findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 3 });
+
         return valueThatOccursThreeTimes * 3;
     }
 
@@ -106,73 +106,61 @@ var Yatzy = function (dice1, dice2, dice3, dice4, dice5) {
 
     this.smallStraight = function () {
         let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
-        
+
         let isThereSmallStraight = true;
-    
+
         let numberOneOcurrenceIndex = 0;
         let numberFiveOcurrenceIndex = 4;
         for (let i = numberOneOcurrenceIndex; i < numberFiveOcurrenceIndex; i++) {
             let ocurrence = ocurrencies[i]
             isThereSmallStraight = isThereSmallStraight & (ocurrence == 1);
-            
+
         }
-    
+
         return isThereSmallStraight ? 15 : 0;
     }
-    
+
     this.largeStraight = function () {
         let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
-        
+
         let isThereSmallStraight = true;
-    
+
         let numberOneOcurrenceIndex = 1;
         let numberFiveOcurrenceIndex = 5;
         for (let i = numberOneOcurrenceIndex; i < numberFiveOcurrenceIndex; i++) {
             let ocurrence = ocurrencies[i]
             isThereSmallStraight = isThereSmallStraight & (ocurrence == 1);
-            
+
         }
-    
+
         return isThereSmallStraight ? 20 : 0;
     }
-}
 
-
-
-Yatzy.fullHouse = function (d1, d2, d3, d4, d5) {
-    var tallies;
-    var _2 = false;
-    var i;
-    var _2_at = 0;
-    var _3 = false;
-    var _3_at = 0;
-
-
-
-
-    tallies = [0, 0, 0, 0, 0, 0, 0, 0];
-    tallies[d1 - 1] += 1;
-    tallies[d2 - 1] += 1;
-    tallies[d3 - 1] += 1;
-    tallies[d4 - 1] += 1;
-    tallies[d5 - 1] += 1;
-
-    for (i = 0; i != 6; i += 1)
-        if (tallies[i] == 2) {
-            _2 = true;
-            _2_at = i + 1;
+    this.fullHouse = function () {
+        let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
+    
+        let isThereAPairOfDices = false;
+        let isThereAThreesomeOfDices = false;
+    
+        let i;
+        let pairDiceValue = 0;
+        let threesomeDiceValue = 0;
+    
+        for (i = 0; i <= ocurrencies.length; i++){
+            if (ocurrencies[i] == 2) {
+                isThereAPairOfDices = true;
+                pairDiceValue = i + 1;
+            } else if (ocurrencies[i] == 3) {
+                isThereAThreesomeOfDices = true;
+                threesomeDiceValue = i + 1;
+            }
         }
-
-    for (i = 0; i != 6; i += 1)
-        if (tallies[i] == 3) {
-            _3 = true;
-            _3_at = i + 1;
-        }
-
-    if (_2 && _3)
-        return _2_at * 2 + _3_at * 3;
-    else
-        return 0;
+    
+        if (isThereAPairOfDices && isThereAThreesomeOfDices)
+            return pairDiceValue * 2 + threesomeDiceValue * 3;
+        else
+            return 0;
+    }
 }
 
 module.exports = Yatzy;
