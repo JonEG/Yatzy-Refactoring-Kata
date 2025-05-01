@@ -2,12 +2,12 @@ var assert = require("assert");
 var Yatzy = require("../lib/yatzy1");
 
 
-describe('Chance', function() {
+describe('sumAll', function() {
     it('scores sum of all dice', function(){
         let expected = 15;
-        let actual = Yatzy.chance(2, 3, 4, 5, 1);
+        let actual = new Yatzy(2, 3, 4, 5, 1).sumAll();
         assert.equal(expected, actual);
-        assert.equal(16, Yatzy.chance(3, 3, 4, 5, 1));
+        assert.equal(16, new Yatzy(3, 3, 4, 5, 1).sumAll());
     });
 });
 

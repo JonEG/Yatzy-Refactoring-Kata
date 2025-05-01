@@ -43,16 +43,14 @@ var Yatzy = function(dice1, dice2, dice3, dice4, dice5) {
         }
         return 0;
     }
-}
 
-Yatzy.chance = function(d1, d2, d3, d4, d5) {
-    var total = 0;
-    total += d1;
-    total += d2;
-    total += d3;
-    total += d4;
-    total += d5;
-    return total;
+    this.sumAll = function() {
+        let total = 0;
+        for (const dice of this.diceList) {
+            total+= dice;
+        }
+        return total;
+    }
 }
 
 Yatzy.yatzy = function() {
