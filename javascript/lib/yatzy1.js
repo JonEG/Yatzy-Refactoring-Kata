@@ -18,14 +18,14 @@ class Yatzy {
 
     sixes = () => this.#sumDicesWithValue(6);
 
-    scorePair = function (dices) {
-        let dicesOcurrencies = this.#countDicesOcurrences(dices);
+    scorePair = () => {
+        let dicesOcurrencies = this.#countDicesOcurrences(this.#diceList);
         let hightesPairDiceValue = this.#findHighestPairInOcurrencies(dicesOcurrencies);
         let sum = hightesPairDiceValue * 2;
         return sum;
     };
 
-    twoPair = function () {
+    twoPair = () => {
         let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
         let highestPairValue = new Yatzy().#findHighestPairInOcurrencies(ocurrencies);
 
@@ -41,7 +41,7 @@ class Yatzy {
         }
     };
 
-    chance = function () {
+    chance = () => {
         let total = 0;
         for (const dice of this.#diceList) {
             total += dice;
@@ -49,7 +49,7 @@ class Yatzy {
         return total;
     };
 
-    fourOfAKind = function () {
+    fourOfAKind = () => {
         let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
 
         let valueThatOccursFourTimes = new Yatzy().#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 4 });
@@ -57,7 +57,7 @@ class Yatzy {
         return valueThatOccursFourTimes * 4;
     };
 
-    threeOfAKind = function () {
+    threeOfAKind = () => {
         let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
 
         let valueThatOccursThreeTimes = new Yatzy().#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 3 });
@@ -65,7 +65,7 @@ class Yatzy {
         return valueThatOccursThreeTimes * 3;
     };
 
-    yatzy = function () {
+    yatzy = () => {
         let counts = this.#countDicesOcurrences(this.#diceList);
 
         for (let i = 0; i != 6; i++) {
@@ -76,7 +76,7 @@ class Yatzy {
         return 0;
     };
 
-    smallStraight = function () {
+    smallStraight = () => {
         let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
 
         let isThereSmallStraight = true;
@@ -92,7 +92,7 @@ class Yatzy {
         return isThereSmallStraight ? 15 : 0;
     };
 
-    largeStraight = function () {
+    largeStraight = () => {
         let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
 
         let isThereSmallStraight = true;
@@ -108,7 +108,7 @@ class Yatzy {
         return isThereSmallStraight ? 20 : 0;
     };
 
-    fullHouse = function () {
+    fullHouse = () => {
         let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
 
         let isThereAPairOfDices = false;
@@ -135,7 +135,7 @@ class Yatzy {
             return 0;
     };
 
-    #sumDicesWithValue(diceNumber) {
+    #sumDicesWithValue = (diceNumber) => {
         let sum = 0;
         for (let i = 0; i < this.#diceList.length; i++) {
             if (this.#diceList[i] == diceNumber) {
@@ -145,7 +145,7 @@ class Yatzy {
         return sum;
     };
 
-    #countDicesOcurrences = function (dices) {
+    #countDicesOcurrences = (dices) => {
         const counts = Array(6).fill(0);
         for (let dice of dices) {
             counts[dice - 1]++;
@@ -153,11 +153,11 @@ class Yatzy {
         return counts;
     };
 
-    #findHighestPairInOcurrencies = function (ocurrencies) {
+    #findHighestPairInOcurrencies = (ocurrencies) => {
         return this.#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 2 });
     };
 
-    #findHighestCombinationValueInOcurrencies = function ({ ocurrencies, numberOfEqualDices }) {
+    #findHighestCombinationValueInOcurrencies = ({ ocurrencies, numberOfEqualDices }) => {
         for (let i = 5; i >= 0; i--) {
             if (ocurrencies[i] >= numberOfEqualDices) {
                 return (i + 1);
