@@ -17,8 +17,8 @@ const YatzyCategory = Object.freeze({
 });
 
 
-var Yatzy = function () {
-    this.score = function (dice, categoryName) {
+class Yatzy {
+    score(dice, categoryName) {
         const category = YatzyCategory[categoryName];
 
         // Calculate dice frequencies
@@ -187,7 +187,8 @@ var Yatzy = function () {
         }
 
         return result;
-    }
+    };
+
 }
 
 module.exports = Yatzy;
