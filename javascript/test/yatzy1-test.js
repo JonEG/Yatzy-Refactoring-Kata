@@ -2,20 +2,20 @@ var assert = require("assert");
 var Yatzy = require("../lib/yatzy1");
 
 
-describe('sumAll', function() {
+describe('chance', function() {
     it('scores sum of all dice', function(){
         let expected = 15;
-        let actual = new Yatzy(2, 3, 4, 5, 1).sumAll();
+        let actual = new Yatzy(2, 3, 4, 5, 1).chance();
         assert.equal(expected, actual);
-        assert.equal(16, new Yatzy(3, 3, 4, 5, 1).sumAll());
+        assert.equal(16, new Yatzy(3, 3, 4, 5, 1).chance());
     });
 });
 
 describe("Yatzy", function() {
     it("scores 50", function() {
-        assert.equal(50, new Yatzy(4,4,4,4,4).get50PointsWhenAllDicesAreEqual());
-        assert.equal(50, new Yatzy(6,6,6,6,6).get50PointsWhenAllDicesAreEqual());
-        assert.equal(0, new Yatzy(6,6,6,6,3).get50PointsWhenAllDicesAreEqual());
+        assert.equal(50, new Yatzy(4,4,4,4,4).yatzy());
+        assert.equal(50, new Yatzy(6,6,6,6,6).yatzy());
+        assert.equal(0, new Yatzy(6,6,6,6,3).yatzy());
     });
 });
 
@@ -68,16 +68,16 @@ describe("Sixes", function() {
 
 describe("One pair", function() {
     it("scores the sum of the highest pair", function() {
-        assert.equal(6, new Yatzy().sumHighestPair([3,4,3,5,6]));
-        assert.equal(10, new Yatzy().sumHighestPair([5,3,3,3,5]));
-        assert.equal(12, new Yatzy().sumHighestPair([5,3,6,6,5]));
+        assert.equal(6, new Yatzy().scorePair([3,4,3,5,6]));
+        assert.equal(10, new Yatzy().scorePair([5,3,3,3,5]));
+        assert.equal(12, new Yatzy().scorePair([5,3,6,6,5]));
     });
 });
 
 describe("Two pair", function() {
     it("scores the sum of the two pairs", function() {
-        assert.equal(16, new Yatzy(3,3,5,4,5).sumHighestTwoPairs());
-        assert.equal(16, new Yatzy(3,3,5,5,5).sumHighestTwoPairs());
+        assert.equal(16, new Yatzy(3,3,5,4,5).twoPair());
+        assert.equal(16, new Yatzy(3,3,5,5,5).twoPair());
     });
 });
 

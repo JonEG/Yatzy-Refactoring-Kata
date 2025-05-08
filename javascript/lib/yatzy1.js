@@ -26,14 +26,14 @@ class Yatzy {
             return sum;
         };
 
-        this.sumHighestPair = function (dices) {
+        this.scorePair = function (dices) {
             let dicesOcurrencies = this.countDicesOcurrences(dices);
             let hightesPairDiceValue = this.findHighestPairInOcurrencies(dicesOcurrencies);
             let sum = hightesPairDiceValue * 2;
             return sum;
         };
 
-        this.sumHighestTwoPairs = function () {
+        this.twoPair = function () {
             let ocurrencies = new Yatzy().countDicesOcurrences(this.diceList);
             let highestPairValue = new Yatzy().findHighestPairInOcurrencies(ocurrencies);
 
@@ -70,7 +70,7 @@ class Yatzy {
             return 0;
         };
 
-        this.sumAll = function () {
+        this.chance = function () {
             let total = 0;
             for (const dice of this.diceList) {
                 total += dice;
@@ -94,7 +94,7 @@ class Yatzy {
             return valueThatOccursThreeTimes * 3;
         };
 
-        this.get50PointsWhenAllDicesAreEqual = function () {
+        this.yatzy = function () {
             let counts = this.countDicesOcurrences(this.diceList);
 
             for (let i = 0; i != 6; i++) {
