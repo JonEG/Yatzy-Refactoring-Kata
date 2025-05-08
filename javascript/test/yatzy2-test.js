@@ -1,21 +1,21 @@
 var assert = require("assert");
-var Yatzy = require("../lib/yatzy2");
+var {Yatzy, Chance, Yatzy2} = require("../lib/yatzy2");
 
 
 describe('Yatzy', function() {
     it('Chance scores sum of all dice', function(){
         const expected = 15;
-        const actual = new Yatzy().score([2, 3, 4, 5, 1], "CHANCE");
+        const actual = Chance.score([2, 3, 4, 5, 1]);
         assert.equal(expected, actual);
-        assert.equal(16, new Yatzy().score([3, 3, 4, 5, 1], "CHANCE"));
+        assert.equal(16, Chance.score([3, 3, 4, 5, 1], "CHANCE"));
     });
 
     
     it('yatzy_scores_50', function()
     {
-        assert.equal(50, new Yatzy().score([ 4, 4, 4, 4, 4 ], "YATZY"));
-        assert.equal(50, new Yatzy().score([ 6, 6, 6, 6, 6 ], "YATZY"));
-        assert.equal(0, new Yatzy().score([ 6, 6, 6, 6, 3 ], "YATZY"));
+        assert.equal(50, Yatzy2.score([ 4, 4, 4, 4, 4 ]));
+        assert.equal(50, Yatzy2.score([ 6, 6, 6, 6, 6 ]));
+        assert.equal(0, Yatzy2.score([ 6, 6, 6, 6, 3 ]));
     })
 
     

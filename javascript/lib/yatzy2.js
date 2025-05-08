@@ -16,36 +16,70 @@ const YatzyCategory = Object.freeze({
     FULL_HOUSE: 'FULL_HOUSE'
 });
 
+class YatzyHand {
+    static diceValues = [6, 5, 4, 3, 2, 1];
 
-class Yatzy {
-    score(dice, categoryName) {
-        const category = YatzyCategory[categoryName];
+    constructor() {
+        if (this.constructor === YatzyHand) {
+            throw new Error("Abstract class cannot be instantiated.");
+        }
+    }
 
+    static score(dice){
         // Calculate dice frequencies
-        const DICE_VALUES = [6, 5, 4, 3, 2, 1];
+        const diceFrequencies = this.calculateDiceFrequencies(dice);
+        const total = this.calculate(dice, diceFrequencies);
+        return total;
+    }
+
+    calculate(dice, diceFrequencies) {
+        throw new Error("Method 'calculate()' must be implemented.");
+    }
+
+    static calculateDiceFrequencies(dice) {
         const diceFrequencies = {};
-        for (const i of DICE_VALUES) {
+        for (const i of this.diceValues) {
             diceFrequencies[i] = 0;
         }
         for (const die of dice) {
             diceFrequencies[die] = (diceFrequencies[die] || 0) + 1;
         }
+        return diceFrequencies;
+    }
+}
+
+class Chance extends YatzyHand {
+    static calculate(dice, diceFrequencies) {
+        return dice.reduce((acc, die) => acc + die, 0);
+    }
+}
+
+class Yatzy2 extends YatzyHand {
+    static calculate(dice, diceFrequencies) {
+        // Score for Yatzy if all dice are the same
+        let yatzyResult = 0;
+        if (Object.values(diceFrequencies).includes(5)) {
+            yatzyResult = 50;
+        }
+        return yatzyResult;
+    }
+}
+
+
+class Yatzy {
+    #diceValues = [6, 5, 4, 3, 2, 1];
+
+    score(dice, categoryName) {
+        const category = YatzyCategory[categoryName];
+
+        // Calculate dice frequencies
+        const diceFrequencies = this.calculateDiceFrequencies(dice);
 
         // Calculate the score
         let result;
         switch (category) {
-            case YatzyCategory.CHANCE:
-                // Chance sums the dice
-                result = dice.reduce((acc, die) => acc + die, 0);
-                break;
-
             case YatzyCategory.YATZY:
-                // Score for Yatzy if all dice are the same
-                let yatzyResult = 0;
-                if (Object.values(diceFrequencies).includes(5)) {
-                    yatzyResult = 50;
-                }
-                result = yatzyResult;
+                result = Yatzy2.calculate(dice, diceFrequencies)
                 break;
 
             case YatzyCategory.ONES:
@@ -82,7 +116,7 @@ class Yatzy {
                 // score pair if two dice are the same
                 let pairResult = 0;
                 // score highest pair if there is more than one
-                for (const i of DICE_VALUES) {
+                for (const i of this.#diceValues) {
                     if (diceFrequencies[i] >= 2) {
                         pairResult = i * 2;
                         break;
@@ -94,7 +128,7 @@ class Yatzy {
             case YatzyCategory.THREE_OF_A_KIND:
                 // score if three dice are the same
                 let threeKindResult = 0;
-                for (const i of DICE_VALUES) {
+                for (const i of this.#diceValues) {
                     if (diceFrequencies[i] >= 3) {
                         threeKindResult = i * 3;
                         break;
@@ -105,7 +139,7 @@ class Yatzy {
             case YatzyCategory.FOUR_OF_A_KIND:
                 // score if four dice are the same
                 let fourKindResult = 0;
-                for (const i of DICE_VALUES) {
+                for (const i of this.#diceValues) {
                     if (diceFrequencies[i] >= 4) {
                         fourKindResult = i * 4;
                         break;
@@ -159,7 +193,7 @@ class Yatzy {
                 }
 
                 if (pairCount === 2) {
-                    for (const i of DICE_VALUES) {
+                    for (const i of this.#diceValues) {
                         if (diceFrequencies[i] >= 2) {
                             twoPairResult += i * 2;
                         }
@@ -189,6 +223,17 @@ class Yatzy {
         return result;
     };
 
+
+    calculateDiceFrequencies(dice) {
+        const diceFrequencies = {};
+        for (const i of this.#diceValues) {
+            diceFrequencies[i] = 0;
+        }
+        for (const die of dice) {
+            diceFrequencies[die] = (diceFrequencies[die] || 0) + 1;
+        }
+        return diceFrequencies;
+    }
 }
 
-module.exports = Yatzy;
+module.exports = {Yatzy, Chance, Yatzy2};
