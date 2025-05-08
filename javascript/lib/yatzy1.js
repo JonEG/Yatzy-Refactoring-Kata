@@ -26,13 +26,13 @@ class Yatzy {
     };
 
     twoPair = () => {
-        let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
-        let highestPairValue = new Yatzy().#findHighestPairInOcurrencies(ocurrencies);
+        let ocurrencies = this.#countDicesOcurrences(this.#diceList);
+        let highestPairValue = this.#findHighestPairInOcurrencies(ocurrencies);
 
         let dicesWithoutHighestValue = this.#diceList.filter(value => value !== highestPairValue);
 
-        let ocurrenciesWithoutHighestValue = new Yatzy().#countDicesOcurrences(dicesWithoutHighestValue);
-        let secondHighestPairValue = new Yatzy().#findHighestPairInOcurrencies(ocurrenciesWithoutHighestValue);
+        let ocurrenciesWithoutHighestValue = this.#countDicesOcurrences(dicesWithoutHighestValue);
+        let secondHighestPairValue = this.#findHighestPairInOcurrencies(ocurrenciesWithoutHighestValue);
 
         if (highestPairValue != 0 && secondHighestPairValue != 0) {
             return (highestPairValue * 2) + (secondHighestPairValue * 2);
@@ -50,17 +50,17 @@ class Yatzy {
     };
 
     fourOfAKind = () => {
-        let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
+        let ocurrencies = this.#countDicesOcurrences(this.#diceList);
 
-        let valueThatOccursFourTimes = new Yatzy().#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 4 });
+        let valueThatOccursFourTimes = this.#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 4 });
 
         return valueThatOccursFourTimes * 4;
     };
 
     threeOfAKind = () => {
-        let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
+        let ocurrencies = this.#countDicesOcurrences(this.#diceList);
 
-        let valueThatOccursThreeTimes = new Yatzy().#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 3 });
+        let valueThatOccursThreeTimes = this.#findHighestCombinationValueInOcurrencies({ ocurrencies, numberOfEqualDices: 3 });
 
         return valueThatOccursThreeTimes * 3;
     };
@@ -77,7 +77,7 @@ class Yatzy {
     };
 
     smallStraight = () => {
-        let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
+        let ocurrencies = this.#countDicesOcurrences(this.#diceList);
 
         let isThereSmallStraight = true;
 
@@ -93,7 +93,7 @@ class Yatzy {
     };
 
     largeStraight = () => {
-        let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
+        let ocurrencies = this.#countDicesOcurrences(this.#diceList);
 
         let isThereSmallStraight = true;
 
@@ -109,7 +109,7 @@ class Yatzy {
     };
 
     fullHouse = () => {
-        let ocurrencies = new Yatzy().#countDicesOcurrences(this.#diceList);
+        let ocurrencies =this.#countDicesOcurrences(this.#diceList);
 
         let isThereAPairOfDices = false;
         let isThereAThreesomeOfDices = false;
