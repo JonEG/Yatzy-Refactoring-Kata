@@ -1,5 +1,5 @@
 var assert = require("assert");
-var {Yatzy, Chance, Yatzy2} = require("../lib/yatzy2");
+var {Yatzy, Chance, Yatzy2, Ones, Twos, Threes, Fours, Fives, Sixes} = require("../lib/yatzy2");
 
 
 describe('Yatzy', function() {
@@ -7,7 +7,7 @@ describe('Yatzy', function() {
         const expected = 15;
         const actual = Chance.score([2, 3, 4, 5, 1]);
         assert.equal(expected, actual);
-        assert.equal(16, Chance.score([3, 3, 4, 5, 1], "CHANCE"));
+        assert.equal(16, Chance.score([3, 3, 4, 5, 1]));
     });
 
     
@@ -21,48 +21,48 @@ describe('Yatzy', function() {
     
     it('test_1s', function()
     {
-        assert.equal(1, new Yatzy().score([ 1, 2, 3, 4, 5 ], "ONES"));
-        assert.equal(2, new Yatzy().score([ 1, 2, 1, 4, 5 ], "ONES"));
-        assert.equal(0, new Yatzy().score([ 6, 2, 2, 4, 5 ], "ONES"));
-        assert.equal(4, new Yatzy().score([ 1, 2, 1, 1, 1 ], "ONES"));
+        assert.equal(1, Ones.score([ 1, 2, 3, 4, 5 ]));
+        assert.equal(2, Ones.score([ 1, 2, 1, 4, 5 ]));
+        assert.equal(0, Ones.score([ 6, 2, 2, 4, 5 ]));
+        assert.equal(4, Ones.score([ 1, 2, 1, 1, 1 ]));
     })
 
     
     it('twos', function()
     {
-        assert.equal(4, new Yatzy().score([ 1, 2, 3, 2, 6 ], "TWOS"));
-        assert.equal(10, new Yatzy().score([ 2, 2, 2, 2, 2 ], "TWOS"));
+        assert.equal(4, Twos.score([ 1, 2, 3, 2, 6 ]));
+        assert.equal(10, Twos.score([ 2, 2, 2, 2, 2 ]));
     })
 
     
     it('threes', function()
     {
-        assert.equal(6, new Yatzy().score([ 1, 2, 3, 2, 3 ], "THREES"));
-        assert.equal(12, new Yatzy().score([ 2, 3, 3, 3, 3 ], "THREES"));
+        assert.equal(6, Threes.score([ 1, 2, 3, 2, 3 ]));
+        assert.equal(12, Threes.score([ 2, 3, 3, 3, 3 ]));
     })
 
     
     it('fours', function()
     {
-        assert.equal(12, new Yatzy().score([ 4, 4, 4, 5, 5 ], "FOURS"));
-        assert.equal(8, new Yatzy().score([ 4, 4, 5, 5, 5 ], "FOURS"));
-        assert.equal(4, new Yatzy().score([ 4, 5, 5, 5, 5 ], "FOURS"));
+        assert.equal(12, Fours.score([ 4, 4, 4, 5, 5 ]));
+        assert.equal(8, Fours.score([ 4, 4, 5, 5, 5 ]));
+        assert.equal(4, Fours.score([ 4, 5, 5, 5, 5 ]));
     })
 
     
     it('fives', function()
     {
-        assert.equal(10, new Yatzy().score([ 4, 4, 4, 5, 5 ], "FIVES"));
-        assert.equal(15, new Yatzy().score([ 4, 4, 5, 5, 5 ], "FIVES"));
-        assert.equal(20, new Yatzy().score([ 4, 5, 5, 5, 5 ], "FIVES"));
+        assert.equal(10, Fives.score([ 4, 4, 4, 5, 5 ]));
+        assert.equal(15, Fives.score([ 4, 4, 5, 5, 5 ]));
+        assert.equal(20, Fives.score([ 4, 5, 5, 5, 5 ]));
     })
 
     
     it('sixes', function()
     {
-        assert.equal(0, new Yatzy().score([ 4, 4, 4, 5, 5 ], "SIXES"));
-        assert.equal(6, new Yatzy().score([ 4, 4, 6, 5, 5 ], "SIXES"));
-        assert.equal(18, new Yatzy().score([ 6, 5, 6, 6, 5 ], "SIXES"));
+        assert.equal(0, Sixes.score([ 4, 4, 4, 5, 5 ]));
+        assert.equal(6, Sixes.score([ 4, 4, 6, 5, 5 ]));
+        assert.equal(18, Sixes.score([ 6, 5, 6, 6, 5 ]));
     })
 
     

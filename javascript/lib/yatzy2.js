@@ -65,6 +65,43 @@ class Yatzy2 extends YatzyHand {
     }
 }
 
+class Ones extends YatzyHand {
+    static calculate(dice, diceFrequencies){
+        return diceFrequencies[1];
+    }
+}
+
+class Twos extends YatzyHand {
+    static calculate(dice, diceFrequencies){
+        return diceFrequencies[2] * 2;
+    }
+}
+
+class Threes extends YatzyHand {
+    static calculate(dice, diceFrequencies){
+        return diceFrequencies[3] * 3;
+    }
+}
+
+class Fours extends YatzyHand {
+    static calculate(dice, diceFrequencies){
+        return diceFrequencies[4] * 4;
+    }
+}
+
+class Fives extends YatzyHand {
+    static calculate(dice, diceFrequencies){
+        return diceFrequencies[5] * 5;
+    }
+}
+
+class Sixes extends YatzyHand {
+    static calculate(dice, diceFrequencies){
+        return diceFrequencies[6] * 6;
+    }
+}
+
+
 
 class Yatzy {
     #diceValues = [6, 5, 4, 3, 2, 1];
@@ -78,40 +115,6 @@ class Yatzy {
         // Calculate the score
         let result;
         switch (category) {
-            case YatzyCategory.YATZY:
-                result = Yatzy2.calculate(dice, diceFrequencies)
-                break;
-
-            case YatzyCategory.ONES:
-                // sum all the ones
-                result = diceFrequencies[1];
-                break;
-
-            case YatzyCategory.TWOS:
-                // Sum all the twos
-                result = diceFrequencies[2] * 2;
-                break;
-
-            case YatzyCategory.THREES:
-                // Sum all the threes
-                result = diceFrequencies[3] * 3;
-                break;
-
-            case YatzyCategory.FOURS:
-                // Sum all the fours
-                result = diceFrequencies[4] * 4;
-                break;
-
-            case YatzyCategory.FIVES:
-                // Sum all the fives
-                result = diceFrequencies[5] * 5;
-                break;
-
-            case YatzyCategory.SIXES:
-                // Sum all the sixes
-                result = diceFrequencies[6] * 6;
-                break;
-
             case YatzyCategory.PAIR:
                 // score pair if two dice are the same
                 let pairResult = 0;
@@ -236,4 +239,4 @@ class Yatzy {
     }
 }
 
-module.exports = {Yatzy, Chance, Yatzy2};
+module.exports = {Yatzy, Chance, Yatzy2, Ones, Twos, Threes, Fours, Fives, Sixes};
